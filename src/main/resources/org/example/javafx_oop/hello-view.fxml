@@ -1,16 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.javafx_oop.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.javafx_oop.HelloController"
+            styleClass="root-pane">
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+    <!-- ══ TOP: MenuBar ========================================-->
+    <top>
+        <MenuBar styleClass="menu-bar">
+
+            <Menu text="File" styleClass="menu">
+                <MenuItem text="New"  onAction="#handleNew"/>
+                <MenuItem text="Open" onAction="#handleOpen"/>
+                <MenuItem text="Save" onAction="#handleSave"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+
+            <Menu text="Edit" styleClass="menu">
+                <MenuItem text="Cut"   onAction="#handleCut"/>
+                <MenuItem text="Copy"  onAction="#handleCopy"/>
+                <MenuItem text="Paste" onAction="#handlePaste"/>
+            </Menu>
+
+            <Menu text="Theme" styleClass="menu">
+                <MenuItem text="Light Theme" onAction="#handleLightTheme"/>
+                <MenuItem text="Dark Theme"  onAction="#handleDarkTheme"/>
+            </Menu>
+
+            <Menu text="Help" styleClass="menu">
+                <MenuItem text="About" onAction="#handleAbout"/>
+            </Menu>
+
+        </MenuBar>
+    </top>
+
+    <!-- === CENTER: Left panel + TableView ======================================== -->
+    <center>
+        <HBox>
+
+            <!-- Left brown panel with profile image -->
+            <VBox styleClass="left-panel" minWidth="170" prefWidth="170">
+                <StackPane styleClass="profile-image-container">
+                    <ImageView fx:id="profileImageView"
+                               fitWidth="130" fitHeight="130"
+                               preserveRatio="true"
+                               styleClass="profile-image"/>
+                    <Circle radius="55" styleClass="profile-circle"/>
+                    <Label text="👤" styleClass="profile-icon"/>
+                </StackPane>
+            </VBox>
+
+            <!-- TableView ======================================== -->
+            <TableView fx:id="tableView" HBox.hgrow="ALWAYS" styleClass="student-table">
+                <columns>
+                    <TableColumn fx:id="colId"         text="ID"          prefWidth="50"/>
+                    <TableColumn fx:id="colFirstName"  text="First Name"  prefWidth="120"/>
+                    <TableColumn fx:id="colLastName"   text="Last Name"   prefWidth="120"/>
+                    <TableColumn fx:id="colDepartment" text="Department"  prefWidth="130"/>
+                    <TableColumn fx:id="colMajor"      text="Major"       prefWidth="120"/>
+                    <TableColumn fx:id="colEmail"      text="Email"       prefWidth="180"/>
+                </columns>
+                <placeholder>
+                    <Label text="No content in table" styleClass="table-placeholder"/>
+                </placeholder>
+            </TableView>
+
+        </HBox>
+    </center>
+
+    <!-- ==== RIGHT: Input form + Buttons ========================================  -->
+    <right>
+        <VBox styleClass="right-panel" spacing="8" minWidth="200" prefWidth="210">
+
+            <TextField fx:id="tfFirstName"  promptText="First Name"  styleClass="form-field"/>
+            <TextField fx:id="tfLastName"   promptText="Last Name"   styleClass="form-field"/>
+            <TextField fx:id="tfDepartment" promptText="Department"  styleClass="form-field"/>
+            <TextField fx:id="tfMajor"      promptText="Major"       styleClass="form-field"/>
+            <TextField fx:id="tfEmail"      promptText="Email"       styleClass="form-field"/>
+            <TextField fx:id="tfImageURL"   promptText="imageURL"    styleClass="form-field"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Clear"  onAction="#handleClear"  styleClass="action-btn" maxWidth="Infinity"/>
+            <Button text="Add"    onAction="#handleAdd"    styleClass="action-btn" maxWidth="Infinity"/>
+            <Button text="Delete" onAction="#handleDelete" styleClass="action-btn" maxWidth="Infinity"/>
+            <Button text="Edit"   onAction="#handleEdit"   styleClass="action-btn" maxWidth="Infinity"/>
+
+        </VBox>
+    </right>
+
+</BorderPane>
